@@ -16,9 +16,16 @@ from PIL import Image
 import pytesseract
 from wordcloud import WordCloud
 
-# Ensure required nltk resources are downloaded
-nltk.download('punkt')
-nltk.download('stopwords')
+# Ensure that the Punkt tokenizer and stopwords are available
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
 
 # Set up page configuration
 st.set_page_config(page_title="Vyaahvar Drishti", layout="wide")
