@@ -303,8 +303,8 @@ def generate_prescriptive_analytics(alignment_score, avg_internal_sentiment, dom
 
 # Generate word cloud
 def generate_word_cloud(text):
-    wordcloud = WordCloud(width=300, height=200, background_color='white').generate(text)
-    plt.figure(figsize=(5, 3.5))  # Adjusted size
+    wordcloud = WordCloud(width=800, height=400, background_color='white',scale=2).generate(text)
+    plt.figure(figsize=(5, 3.5), dpi=150)  # Adjusted size
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
     st.pyplot(plt)
