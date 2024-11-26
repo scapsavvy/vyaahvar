@@ -346,7 +346,7 @@ def generate_sentiment_distribution_chart(sentiments):
     st.pyplot(plt)
 
 # Report generation section
-if option == "Generate Report":
+if option == "📊Generate Report":
     st.title("Generate Vyaahvar Drishti Report")
     company_name = st.text_input("Enter the company name to generate a report:")
 
@@ -469,7 +469,7 @@ if option == "Generate Report":
             st.error(error_message or "Please enter a company name and upload all required files to generate a report.")
 
 # Contact Us Section
-elif option == "Contact Us":
+elif option == "📞Contact Us":
     st.subheader("Contact Us")
     st.write("If you have any questions or feedback, please reach out to us at:")
     st.write("📧 Email: info@nuvleap.com")
