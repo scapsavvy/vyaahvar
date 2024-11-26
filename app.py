@@ -244,8 +244,8 @@ def generate_diagnostics(company_name, alignment_score, avg_external_sentiment, 
         "Supplier Fairness": supplier_fairness,
         "Regulator Mentions": regulator_mentions_statement,
         "Employee Engagement": employee_engagement,
-        "Alignment Score": f"Alignment Score: {alignment_score:.2f}",
-        "Dominant External Emotion": f"Dominant External Emotion: {dominant_external_emotion}"
+        "Alignment Score": f" {alignment_score:.2f}",
+        "Dominant External Emotion": f" {dominant_external_emotion}"
     }
 
 # Generate prognostics
@@ -350,7 +350,7 @@ if option == "Generate Report":
                     return False, f"Invalid file type for {file.name}. Please upload a .txt, .csv, .pdf, .png, .jpg, or .jpeg file."
         return True, ""
 
-    if st.button("Generate Diagnostic Report"):
+    if st.button("Generate Report"):
         # Check that all files are uploaded and valid
         files = [internal_data_file, external_data_file, employee_reviews_file]
         valid, error_message = validate_files(files)
