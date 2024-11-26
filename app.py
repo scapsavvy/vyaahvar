@@ -134,7 +134,7 @@ if option == "🏠Home":  # Ensure the option matches the menu name
 
 
     # Display the image using st.image
-    st.image("https://i.imgur.com/2JWfPlk.png", width=250, caption="NUVLeap Logo")
+    st.image("https://i.imgur.com/2JWfPlk.png", width=200, caption="NUVLeap Logo")
 
 # Sentiment analysis using TextBlob
 def get_sentiment(text):
