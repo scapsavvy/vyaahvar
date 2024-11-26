@@ -33,7 +33,7 @@ def load_css():
 
     body {
         font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, #e0f7fa, #c7d2fe 100%);
+        background: linear-gradient(135deg, #c7d2fe, #c7d2fe 100%);
         color: #333;
         margin: 0;
         padding: 0;
