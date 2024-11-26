@@ -97,7 +97,7 @@ if option == "🏠 Home":
     """, unsafe_allow_html=True)
 
     # Display the image using st.image
-    st.image("https://i.imgur.com/2JWfPlk.png", width=250, caption="NUVLeap Logo")
+    st.image("https://i.imgur.com/2JWfPlk.png", width=150, caption="NUVLeap Logo")
 
 # Sentiment analysis using TextBlob
 def get_sentiment(text):
