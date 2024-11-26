@@ -23,7 +23,7 @@ nltk.download('stopwords')
 # Set up page configuration
 st.set_page_config(page_title="Vyaahvar Drishti", layout="wide")
 
-# Load custom CSS styles
+# Load Custom CSS for Styling
 def load_css():
     custom_css = """
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
