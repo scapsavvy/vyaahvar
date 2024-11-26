@@ -336,123 +336,123 @@ if option == "Generate Report":
     st.title("Generate Vyaahvar Drishti Report")
     company_name = st.text_input("Enter the company name to generate a report:")
 
-# File uploaders for internal, external, and employee reviews data
-internal_data_file = st.file_uploader("Upload internal data file (e.g., internal_lda_lexicon.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
-external_data_file = st.file_uploader("Upload external data file (e.g., ext_cleaned_coca_cola_reviews.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
-employee_reviews_file = st.file_uploader("Upload employee reviews file (e.g., int_cleaned_coca_cola_reviews.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
+    # File uploaders for internal, external, and employee reviews data
+    internal_data_file = st.file_uploader("Upload internal data file (e.g., internal_lda_lexicon.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
+    external_data_file = st.file_uploader("Upload external data file (e.g., ext_cleaned_coca_cola_reviews.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
+    employee_reviews_file = st.file_uploader("Upload employee reviews file (e.g., int_cleaned_coca_cola_reviews.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
 
-# File validation for proper uploads
-def validate_files(files):
-    for file in files:
-        if file is not None:
-            file_extension = file.name.split('.')[-1]
-            if file_extension not in ["txt", "csv", "pdf", "png", "jpg", "jpeg"]:
-                return False, f"Invalid file type for {file.name}. Please upload a .txt, .csv, .pdf, .png, .jpg, or .jpeg file."
-    return True, ""
+    # File validation for proper uploads
+    def validate_files(files):
+        for file in files:
+            if file is not None:
+                file_extension = file.name.split('.')[-1]
+                if file_extension not in ["txt", "csv", "pdf", "png", "jpg", "jpeg"]:
+                    return False, f"Invalid file type for {file.name}. Please upload a .txt, .csv, .pdf, .png, .jpg, or .jpeg file."
+        return True, ""
 
-if st.button("Generate Diagnostic Report"):
-    # Check that all files are uploaded and valid
-    files = [internal_data_file, external_data_file, employee_reviews_file]
-    valid, error_message = validate_files(files)
+    if st.button("Generate Diagnostic Report"):
+        # Check that all files are uploaded and valid
+        files = [internal_data_file, external_data_file, employee_reviews_file]
+        valid, error_message = validate_files(files)
 
-    if valid and company_name and internal_data_file and external_data_file and employee_reviews_file:
-        with st.spinner(f"Generating report for {company_name}..."):
-            time.sleep(3)  # Simulate processing
+        if valid and company_name and internal_data_file and external_data_file and employee_reviews_file:
+            with st.spinner(f"Generating report for {company_name}..."):
+                time.sleep(3)  # Simulate processing
 
-            # Load data from uploaded files
-            internal_data = load_data(internal_data_file)
-            external_data = load_data(external_data_file)
-            employee_reviews = load_data(employee_reviews_file)
+                # Load data from uploaded files
+                internal_data = load_data(internal_data_file)
+                external_data = load_data(external_data_file)
+                employee_reviews = load_data(employee_reviews_file)
 
-            if not internal_data or not external_data or not employee_reviews:
-                st.error("Failed to load data. Please check the uploaded files.")
-            else:
-                # Preprocess external data
-                processed_external_data = [preprocess_text(text) for text in external_data]
+                if not internal_data or not external_data or not employee_reviews:
+                    st.error("Failed to load data. Please check the uploaded files.")
+                else:
+                    # Preprocess external data
+                    processed_external_data = [preprocess_text(text) for text in external_data]
 
-                # Calculate alignment score
-                alignment_score = calculate_alignment_score(internal_data, processed_external_data)
+                    # Calculate alignment score
+                    alignment_score = calculate_alignment_score(internal_data, processed_external_data)
 
-                # Internal sentiment analysis
-                internal_sentiments = [get_sentiment(text) for text in employee_reviews]
-                avg_internal_sentiment = sum(internal_sentiments) / len(internal_sentiments)
+                    # Internal sentiment analysis
+                    internal_sentiments = [get_sentiment(text) for text in employee_reviews]
+                    avg_internal_sentiment = sum(internal_sentiments) / len(internal_sentiments)
 
-                # External sentiment analysis
-                external_sentiments = [get_sentiment(text) for text in external_data]
-                avg_external_sentiment = sum(external_sentiments) / len(external_sentiments)
+                    # External sentiment analysis
+                    external_sentiments = [get_sentiment(text) for text in external_data]
+                    avg_external_sentiment = sum(external_sentiments) / len(external_sentiments)
 
-                # External emotion analysis
-                dominant_external_emotion, aggregated_emotions = aggregate_emotion_scores(external_data)
+                    # External emotion analysis
+                    dominant_external_emotion, aggregated_emotions = aggregate_emotion_scores(external_data)
 
-                # Count mentions of supplier and regulator-related terms
-                supplier_keywords = ['supplier', 'fairness', 'quality', 'delivery', 'partnership']
-                regulator_keywords = ['regulator', 'compliance', 'law', 'policy', 'regulation']
-                supplier_mentions = sum([1 for text in processed_external_data if any(keyword in text for keyword in supplier_keywords)])
-                regulator_mentions = sum([1 for text in processed_external_data if any(keyword in text for keyword in regulator_keywords)])
+                    # Count mentions of supplier and regulator-related terms
+                    supplier_keywords = ['supplier', 'fairness', 'quality', 'delivery', 'partnership']
+                    regulator_keywords = ['regulator', 'compliance', 'law', 'policy', 'regulation']
+                    supplier_mentions = sum([1 for text in processed_external_data if any(keyword in text for keyword in supplier_keywords)])
+                    regulator_mentions = sum([1 for text in processed_external_data if any(keyword in text for keyword in regulator_keywords)])
 
-                # Generate diagnostic report
-                diagnostics = generate_diagnostics(
-                    company_name=company_name,
-                    alignment_score=alignment_score,
-                    avg_external_sentiment=avg_external_sentiment,
-                    dominant_external_emotion=dominant_external_emotion,
-                    avg_internal_sentiment=avg_internal_sentiment,
-                    supplier_mentions=supplier_mentions,
-                    regulator_mentions=regulator_mentions
-                )
+                    # Generate diagnostic report
+                    diagnostics = generate_diagnostics(
+                        company_name=company_name,
+                        alignment_score=alignment_score,
+                        avg_external_sentiment=avg_external_sentiment,
+                        dominant_external_emotion=dominant_external_emotion,
+                        avg_internal_sentiment=avg_internal_sentiment,
+                        supplier_mentions=supplier_mentions,
+                        regulator_mentions=regulator_mentions
+                    )
 
-                # Generate prognostic report
-                prognostics = generate_prognostics(alignment_score, avg_internal_sentiment)
+                    # Generate prognostic report
+                    prognostics = generate_prognostics(alignment_score, avg_internal_sentiment)
 
-                # Generate risk, opportunity, and improvement report
-                risk, opportunity, improvement = generate_risk_opportunity_improvement(alignment_score, avg_internal_sentiment, dominant_external_emotion)
+                    # Generate risk, opportunity, and improvement report
+                    risk, opportunity, improvement = generate_risk_opportunity_improvement(alignment_score, avg_internal_sentiment, dominant_external_emotion)
 
-                # Generate prescriptive analytics
-                improvement_strategies = generate_prescriptive_analytics(alignment_score, avg_internal_sentiment, dominant_external_emotion)
+                    # Generate prescriptive analytics
+                    improvement_strategies = generate_prescriptive_analytics(alignment_score, avg_internal_sentiment, dominant_external_emotion)
 
-                # Display the results
-                st.success(f"Report for {company_name}")
-                st.subheader("Diagnostics")
-                for key, value in diagnostics.items():
-                    st.markdown(f"<div class='card'><p style='font-size: 18px; color: #333;'><strong>{key}:</strong> {value}</p></div>", unsafe_allow_html=True)
+                    # Display the results
+                    st.success(f"Report for {company_name}")
+                    st.subheader("Diagnostics")
+                    for key, value in diagnostics.items():
+                        st.markdown(f"<div class='card'><p style='font-size: 18px; color: #333;'><strong>{key}:</strong> {value}</p></div>", unsafe_allow_html=True)
 
-                st.subheader("Prognostics")
-                st.write(prognostics)
+                    st.subheader("Prognostics")
+                    st.write(prognostics)
 
-                st.subheader("Risk, Opportunity, and Improvement")
-                st.write(f"**Risk:** {risk}")
-                st.write(f"**Opportunity:** {opportunity}")
-                st.write(f"**Improvement:** {improvement}")
+                    st.subheader("Risk, Opportunity, and Improvement")
+                    st.write(f"**Risk:** {risk}")
+                    st.write(f"**Opportunity:** {opportunity}")
+                    st.write(f"**Improvement:** {improvement}")
 
-                st.subheader("Prescriptive Analytics")
-                for strategy in improvement_strategies:
-                    st.write(f"- {strategy}")
+                    st.subheader("Prescriptive Analytics")
+                    for strategy in improvement_strategies:
+                        st.write(f"- {strategy}")
 
-                st.subheader("Emotion Analysis")
-                emotion_data = aggregated_emotions
-                emotion_df = pd.DataFrame(list(emotion_data.items()), columns=['Emotion', 'Score'])
-                sns.set(style="whitegrid")
-                plt.figure(figsize=(5, 3.5))  # Adjusted size
-                sns.barplot(x='Score', y='Emotion', data=emotion_df, palette="coolwarm")
-                plt.title('Emotion Analysis', fontsize=12)
-                plt.xlabel('Score', fontsize=10)
-                plt.ylabel('Emotion', fontsize=10)
-                plt.xticks(fontsize=8)
-                plt.yticks(fontsize=8)
-                st.pyplot(plt)
+                    st.subheader("Emotion Analysis")
+                    emotion_data = aggregated_emotions
+                    emotion_df = pd.DataFrame(list(emotion_data.items()), columns=['Emotion', 'Score'])
+                    sns.set(style="whitegrid")
+                    plt.figure(figsize=(5, 3.5))  # Adjusted size
+                    sns.barplot(x='Score', y='Emotion', data=emotion_df, palette="coolwarm")
+                    plt.title('Emotion Analysis', fontsize=12)
+                    plt.xlabel('Score', fontsize=10)
+                    plt.ylabel('Emotion', fontsize=10)
+                    plt.xticks(fontsize=8)
+                    plt.yticks(fontsize=8)
+                    st.pyplot(plt)
 
-                st.subheader("Word Cloud - Internal Data")
-                generate_word_cloud(' '.join(internal_data))
-                st.subheader("Word Cloud - External Data")
-                generate_word_cloud(' '.join(external_data))
+                    st.subheader("Word Cloud - Internal Data")
+                    generate_word_cloud(' '.join(internal_data))
+                    st.subheader("Word Cloud - External Data")
+                    generate_word_cloud(' '.join(external_data))
 
-                # Generate sentiment distribution chart
-                st.subheader("Sentiment Distribution - Internal Data")
-                generate_sentiment_distribution_chart(internal_sentiments)
-                st.subheader("Sentiment Distribution - External Data")
-                generate_sentiment_distribution_chart(external_sentiments)
-    else:
-        st.error(error_message or "Please enter a company name and upload all required files to generate a report.")
+                    # Generate sentiment distribution chart
+                    st.subheader("Sentiment Distribution - Internal Data")
+                    generate_sentiment_distribution_chart(internal_sentiments)
+                    st.subheader("Sentiment Distribution - External Data")
+                    generate_sentiment_distribution_chart(external_sentiments)
+        else:
+            st.error(error_message or "Please enter a company name and upload all required files to generate a report.")
 
 # Contact Us Section
 elif option == "Contact Us":
