@@ -18,6 +18,7 @@ from wordcloud import WordCloud
 
 # Ensure required nltk resources are downloaded
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 # Ensure necessary NLTK data is downloaded
 nltk.download('punkt', quiet=True)
