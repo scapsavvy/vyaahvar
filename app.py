@@ -17,12 +17,9 @@ import pytesseract
 from wordcloud import WordCloud
 
 # Ensure required nltk resources are downloaded
-nltk.download('punkt')
+nltk.download('punkt',quiet=True)
 nltk.download('punkt_tab')
 nltk.download('stopwords')
-# Ensure necessary NLTK data is downloaded
-nltk.download('punkt', quiet=True)
-
 # Set up page configuration
 st.set_page_config(page_title="Vyaahvar Drishti", layout="wide")
 
