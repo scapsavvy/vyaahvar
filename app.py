@@ -16,16 +16,9 @@ from PIL import Image
 import pytesseract
 from wordcloud import WordCloud
 
-# Ensure that the Punkt tokenizer and stopwords are available
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
-
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('stopwords')
+# Ensure required nltk resources are downloaded
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # Set up page configuration
 st.set_page_config(page_title="Vyaahvar Drishti", layout="wide")
@@ -107,6 +100,7 @@ def load_css():
 load_css()
 
 # Sidebar navigation
+st.sidebar.title("Navigation")
 menu = ["Home", "Generate Report", "Contact Us"]
 option = st.sidebar.selectbox("Navigation", menu)
 
@@ -123,7 +117,7 @@ if option == "Home":
         """, unsafe_allow_html=True)
 
     # Display the image using st.image
-    st.image("https://i.imgur.com/2JWfPlk.png", width=250)
+    st.image("C:/Users/sousa/OneDrive/Pictures/nuv-logo.png", width=250, caption="NUVLeap Logo")
 
 # Sentiment analysis using TextBlob
 def get_sentiment(text):
@@ -344,7 +338,7 @@ if option == "Generate Report":
     external_data_file = st.file_uploader("Upload external data file (e.g., ext_cleaned_coca_cola_reviews.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
     employee_reviews_file = st.file_uploader("Upload employee reviews file (e.g., int_cleaned_coca_cola_reviews.txt, .csv, .pdf, .png, .jpg, .jpeg)", type=["txt", "csv", "pdf", "png", "jpg", "jpeg"])
 
-    if st.button("Generate Report"):
+    if st.button("Generate Diagnostic Report"):
         if company_name and internal_data_file and external_data_file and employee_reviews_file:
             with st.spinner(f"Generating report for {company_name}..."):
                 time.sleep(3)  # Simulate processing
