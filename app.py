@@ -104,7 +104,7 @@ load_css()
 
 # Sidebar navigation
 st.sidebar.title("Navigation")
-menu = ["Home", "Generate Report", "Contact Us"]
+menu = ["🏠Home", "📊Generate Report", "📞Contact Us"]
 option = st.sidebar.selectbox("Navigation", menu)
 
 # Home Section
