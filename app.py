@@ -116,7 +116,7 @@ if option == "Home":
         """, unsafe_allow_html=True)
 
     # Display the image using st.image
-    st.image("C:/Users/sousa/OneDrive/Pictures/nuv-logo.png", width=250, caption="NUVLeap Logo")
+    st.image("https://i.imgur.com/2JWfPlk.png", width=250)
 
 # Sentiment analysis using TextBlob
 def get_sentiment(text):
