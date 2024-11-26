@@ -107,7 +107,7 @@ load_css()
 # Sidebar navigation
 st.sidebar.title("Navigation")
 menu = ["🏠Home", "📊Generate Report", "📞Contact Us"]
-option = st.sidebar.selectbox("Navigation", menu)
+option = st.sidebar.selectbox("", menu)
 
 # Home Section
 if option == "🏠Home":  # Ensure the option matches the menu name
