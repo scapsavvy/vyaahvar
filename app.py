@@ -125,10 +125,17 @@ if option == "Home":
 # Sentiment analysis using TextBlob
 def get_sentiment(text):
     return TextBlob(text).sentiment.polarity
-
-# Emotion analysis using NRCLex
+    
+# Preprocess text for TF-IDF and keyword analysis
+def preprocess_text(text):
+    stop_words = set(stopwords.words('english'))
+    tokens = word_tokenize(text.lower())
+    filtered_tokens = [word for word in tokens if word.isalnum() and word not in stop_words]
+    return ' '.join(filtered_tokens)
+    
 def analyze_emotion(text):
-    emotion_scores = NRCLex(text).affect_frequencies
+    preprocessed_text = preprocess_text(text)
+    emotion_scores = NRCLex(preprocessed_text).affect_frequencies
     emotions = {emotion: round(score, 2) for emotion, score in emotion_scores.items() if emotion not in ['positive', 'negative']}
     dominant_emotion = max(emotions, key=emotions.get, default="none")
     return {
@@ -145,13 +152,6 @@ def aggregate_emotion_scores(reviews):
             aggregated_emotions[emotion] = aggregated_emotions.get(emotion, 0) + score
     dominant_emotion = max(aggregated_emotions, key=aggregated_emotions.get, default="none")
     return dominant_emotion, aggregated_emotions
-
-# Preprocess text for TF-IDF and keyword analysis
-def preprocess_text(text):
-    stop_words = set(stopwords.words('english'))
-    tokens = word_tokenize(text.lower())
-    filtered_tokens = [word for word in tokens if word.isalnum() and word not in stop_words]
-    return ' '.join(filtered_tokens)
 
 # Alignment scoring using cosine similarity
 def calculate_alignment_score(internal_clusters, external_data, num_clusters=5):
