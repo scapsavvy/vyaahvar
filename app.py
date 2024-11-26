@@ -31,44 +31,63 @@ def load_css():
     body {
         font-family: 'Montserrat', sans-serif;
         background: linear-gradient(135deg, #e0f7fa, #c7d2fe 100%);
+        color: #333;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
     }
     .container {
         text-align: center;
+        padding: 20px;
         margin-top: 50px;
+    }
+    .header img {
+        width: 250px;
+        margin-bottom: 20px;
     }
     .header h1 {
         font-family: 'Poppins', sans-serif;
-        font-size: 64px;
         color: #004d40;
+        font-size: 56px;
+        margin: 20px 0;
         animation: fadeIn 2s ease-in-out;
-        background: linear-gradient(90deg, #ff6f61, #ffcc33);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
     .header p {
-        font-size: 22px;
+        font-family: 'Montserrat', sans-serif;
         color: #333;
-        margin-top: 10px;
+        font-size: 22px;
+        margin: 10px 0;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        margin-top: 30px;
+        color: #555;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px 0;
     }
     .button {
-        background: linear-gradient(to right, #00c6ff, #0072ff);
+        background-color: #00796b;
         color: white;
-        padding: 15px 30px;
         border: none;
-        border-radius: 5px;
+        padding: 15px 30px;
         font-size: 18px;
-        font-family: 'Poppins', sans-serif;
+        border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s;
+        transition: background-color 0.3s ease;
         margin-top: 20px;
-        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+        font-family: 'Poppins', sans-serif;
     }
     .button:hover {
-        background: linear-gradient(to right, #ff6f61, #ffcc33);
-        transform: scale(1.05);
+        background-color: #004d40;
     }
     @keyframes fadeIn {
         0% { opacity: 0; }
@@ -77,12 +96,12 @@ def load_css():
     """
     st.markdown(f'<style>{custom_css}</style>', unsafe_allow_html=True)
 
-# Load CSS
+# Load styles
 load_css()
 
-# Sidebar Navigation
+# Sidebar navigation
 st.sidebar.title("Navigation")
-menu = ["🏠 Home", "📊 Generate Report", "📞 Contact Us"]
+menu = ["Home", "Generate Report", "Contact Us"]
 option = st.sidebar.selectbox("Navigation", menu)
 
 # Home Section
@@ -91,12 +110,11 @@ if option == "Home":
         """
         <div class="container">
             <div class="header">
-                <h1>🌟 NUVLeap 🌟</h1>
+                <h1 class="animated-title">NUVLeap</h1>
                 <p>Welcome to the <strong>NUVLeap platform</strong>, where insights meet innovation! Discover organizational behavior analysis and explore in-depth metrics to unlock the potential of your company.</p>
             </div>
         </div>
         """, unsafe_allow_html=True)
-    
     # Display the image using st.image
     st.image("https://i.imgur.com/2JWfPlk.png", width=150, caption="NUVLeap Logo")
 
