@@ -104,7 +104,7 @@ load_css()
 
 # Sidebar navigation
 st.sidebar.title("Navigation")
-menu = ["Home", "Generate Report", "Contact Us"]
+menu = ["🏠 Home", "📊 Generate Report", "📞 Contact Us"]
 option = st.sidebar.selectbox("Navigation", menu)
 
 # Home Section
@@ -113,7 +113,7 @@ if option == "Home":
         """
         <div class="container">
             <div class="header">
-                <h1 class="animated-title">NUVLeap</h1>
+                <h1 class="animated-title">🌟NUVLeap🌟</h1>
                 <p>Welcome to the <strong>NUVLeap platform</strong>, where insights meet innovation! Discover organizational behavior analysis and explore in-depth metrics to unlock the potential of your company.</p>
             </div>
         </div>
