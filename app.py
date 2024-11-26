@@ -23,7 +23,6 @@ nltk.download('stopwords')
 # Set up page configuration
 st.set_page_config(page_title="Vyaahvar Drishti", layout="wide")
 
-# Load Custom CSS for Styling
 def load_css():
     custom_css = """
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
@@ -34,88 +33,44 @@ def load_css():
         color: #333;
         margin: 0;
         padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
     }
     .container {
         text-align: center;
         padding: 20px;
         margin-top: 50px;
     }
-    .header img {
-        width: 250px;
-        margin-bottom: 20px;
-    }
     .header h1 {
         font-family: 'Poppins', sans-serif;
         color: #004d40;
         font-size: 56px;
-        margin: 20px 0;
         animation: fadeIn 2s ease-in-out;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
     .header p {
-        font-family: 'Montserrat', sans-serif;
-        color: #333;
         font-size: 22px;
-        margin: 10px 0;
-    }
-    .footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 16px;
-        margin-top: 30px;
-        color: #555;
-        background: rgba(255, 255, 255, 0.8);
-        padding: 10px 0;
-    }
-    .button {
-        background-color: #00796b;
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        font-size: 18px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-        font-family: 'Poppins', sans-serif;
-    }
-    .button:hover {
-        background-color: #004d40;
-    }
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
+        color: #333;
     }
     """
     st.markdown(f'<style>{custom_css}</style>', unsafe_allow_html=True)
 
-# Load styles
+# Load CSS
 load_css()
 
-# Sidebar navigation
+# Sidebar Navigation
 st.sidebar.title("Navigation")
 menu = ["Home", "Generate Report", "Contact Us"]
 option = st.sidebar.selectbox("Navigation", menu)
 
 # Home Section
 if option == "Home":
-    st.markdown(
-        """
+    st.markdown("""
         <div class="container">
             <div class="header">
-                <h1 class="animated-title">NUVLeap</h1>
-                <p>Welcome to the <strong>NUVLeap platform</strong>, where insights meet innovation! Discover organizational behavior analysis and explore in-depth metrics to unlock the potential of your company.</p>
+                <h1>NUVLeap</h1>
+                <p>Welcome to the <strong>NUVLeap platform</strong>! Unlock insights and explore metrics to enhance your company.</p>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-    # Display the image using st.image
+    """, unsafe_allow_html=True)
     st.image("https://i.imgur.com/2JWfPlk.png", width=150, caption="NUVLeap Logo")
 
 # Sentiment analysis using TextBlob
