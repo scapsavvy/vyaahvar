@@ -86,16 +86,17 @@ menu = ["🏠 Home", "📊 Generate Report", "📞 Contact Us"]
 option = st.sidebar.selectbox("Navigation", menu)
 
 # Home Section
-if option == "🏠 Home":
-    st.markdown("""
+if option == "Home":
+    st.markdown(
+        """
         <div class="container">
             <div class="header">
                 <h1>🌟 NUVLeap 🌟</h1>
-                <p>Welcome to <strong>NUVLeap</strong>! Unlock the full potential of your organization with actionable insights and innovative analysis.</p>
+                <p>Welcome to the <strong>NUVLeap platform</strong>, where insights meet innovation! Discover organizational behavior analysis and explore in-depth metrics to unlock the potential of your company.</p>
             </div>
         </div>
-    """, unsafe_allow_html=True)
-
+        """, unsafe_allow_html=True)
+    
     # Display the image using st.image
     st.image("https://i.imgur.com/2JWfPlk.png", width=150, caption="NUVLeap Logo")
 
