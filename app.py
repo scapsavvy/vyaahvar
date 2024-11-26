@@ -26,14 +26,13 @@ nltk.download('punkt', quiet=True)
 # Set up page configuration
 st.set_page_config(page_title="Vyaahvar Drishti", layout="wide")
 
-# Load custom CSS styles
 def load_css():
     custom_css = """
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
 
     body {
         font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, #c7d2fe, #c7d2fe 100%);
+        background: #f0f8ff;  /* Light Blue Solid Color or remove the gradient for a cleaner look */
         color: #333;
         margin: 0;
         padding: 0;
@@ -47,6 +46,9 @@ def load_css():
         text-align: center;
         padding: 20px;
         margin-top: 50px;
+        background-color: #ffffff;  /* White background for better contrast */
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     }
     .header img {
         width: 250px;
